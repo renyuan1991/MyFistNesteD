@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.renyuan.nestedscroll.widget.MyScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/myScrollview_msv_fv"
+    android:layout_height="match_parent"
+     >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="#838763" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#f08763"
+                android:gravity="center"
+                android:text="第一个" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="#830949"
+                android:text="第二个" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="#567839"
+                android:text="第三个" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#007764"
+                android:gravity="center"
+                android:text="第四个" />
+        </LinearLayout>
+
+        <com.renyuan.nestedscroll.widget.MyViewPager
+            android:id="@+id/fragment_v_at"
+            android:layout_width="match_parent"
+            android:layout_height="640dp"
+             />
+    </LinearLayout>
+
+</com.renyuan.nestedscroll.widget.MyScrollView>

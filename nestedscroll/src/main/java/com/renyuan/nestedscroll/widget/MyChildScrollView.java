@@ -44,20 +44,19 @@ public class MyChildScrollView extends ScrollView implements NestedScrollingChil
                 int moveX = (int)ev.getRawX();
                 int moveY = (int)ev.getRawY();
                 int dx = moveX - downX;
-                int dy = moveY - downY;
+                int dy = -(moveY - downY);//滚动方法的方向跟坐标是相反的，所以这里要加一个负号
+                downX = moveX;
+                downY = moveY;
                 //在consumed中就是父类滑动后剩下的距离，
-                System.out.println("dispatchNestedPreScroll(0,dy,consumed,offsetInWindow) = " + dispatchNestedPreScroll(0, dy, consumed, offsetInWindow));
                 if(dispatchNestedPreScroll(0,dy,consumed,offsetInWindow)){
-                    if(dy>0){
-                        System.out.println("-----down-----");
-                        dy = dy - consumed[1];
-                    }else if(dy<0){
-                        System.out.println("------up------");
-                        dy = dy+consumed[1];
-                    }
+                    dy = consumed[1];
+                    MyChildScrollView.this.scrollBy(0, dy);
+                    System.out.println("消****************耗");
+                }else {
+                    System.out.println("不-------消--------耗");
                 }
-                MyChildScrollView.this.scrollBy(0, dy);
-                System.out.println("dy = " + dy);
+                System.out.println("MyChildScrollView .. dy = " + dy);
+                System.out.println("================-------------------===============");
                 break;
             case MotionEvent.ACTION_UP:
                 stopNestedScroll();
@@ -65,6 +64,7 @@ public class MyChildScrollView extends ScrollView implements NestedScrollingChil
         }
         return true;
     }
+
 
     //~~~~~~~ 嵌套滑动的处理方法 ~~~~~~~
     @Override

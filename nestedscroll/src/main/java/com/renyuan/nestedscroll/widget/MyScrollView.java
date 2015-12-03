@@ -15,8 +15,9 @@ import android.widget.ScrollView;
  * description
 */
 public class MyScrollView extends ScrollView implements NestedScrollingParent {
-    private NestedScrollingParentHelper parentHelper;
     private int myScrollDis = 0;
+    private int sumScroll = 0;
+    private NestedScrollingParentHelper parentHelper;
     public MyScrollView(Context context) {
         super(context);
     }
@@ -61,20 +62,38 @@ public class MyScrollView extends ScrollView implements NestedScrollingParent {
     @Override
     public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
 //        super.onNestedPreScroll(target, dx, dy, consumed);
-        if(Math.abs(dy)>myScrollDis){//在y轴上的距离大于要滚动的距离，这个时候要让子空间消耗剩下的距离
-            if(dy>0){
-                MyScrollView.this.scrollBy(dx, myScrollDis);
-                System.out.println("父类滚动的距离：myScrollDis = " + myScrollDis);
-            }else if(dy<0){
-                MyScrollView.this.scrollBy(dx, -myScrollDis);
-                System.out.println("父类滚动的距离：myScrollDis = " + (-myScrollDis));
-            }
-            consumed[1] = myScrollDis;
-        } else {
+        //切记，把父类滑剩下的给子类
+        if((sumScroll+dy)>myScrollDis){//超过了边界
+            MyScrollView.this.scrollBy(dx, myScrollDis - sumScroll);
+            sumScroll = myScrollDis;
+            consumed[1] = dy - (myScrollDis - sumScroll);
+        }else {
             MyScrollView.this.scrollBy(dx, dy);
-            System.out.println("父类滚动的距离：myScrollDis = " + dy);
-            consumed[1] = Math.abs(dy);
+            sumScroll += dy;//记录这个view滑动的真实距离
+            consumed[1] = 0;
         }
+
+//
+//        if(Math.abs(dy)>myScrollDis&&needScroll!=0){//在y轴上的距离大于要滚动的距离，这个时候要让子空间消耗剩下的距离
+//            if(dy>0){
+//                MyScrollView.this.scrollBy(dx, myScrollDis);
+//                sumScroll = myScrollDis;
+//                needScroll = myScrollDis - sumScroll;
+//                System.out.println("父类滚动的距离：myScrollDis = " + myScrollDis);
+//            }else if(dy<0){
+//                MyScrollView.this.scrollBy(dx, -myScrollDis);
+//                sumScroll = -myScrollDis;
+//                needScroll = myScrollDis + sumScroll;
+//                System.out.println("父类滚动的距离：myScrollDis = " + (-myScrollDis));
+//            }
+//            consumed[1] = myScrollDis;
+//        } else if(needScroll!=0){
+//            MyScrollView.this.scrollBy(dx, dy);
+//            sumScroll += myScrollDis;
+//            needScroll = myScrollDis - sumScroll;
+//            System.out.println("父类滚动的距离：myScrollDis = " + dy);
+//            consumed[1] = Math.abs(dy);
+//        }
     }
 
     @Override

@@ -29,7 +29,7 @@ public class FgAndVP extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fg_vp);
         MyScrollView myScrollView = (MyScrollView) findViewById(R.id.myScrollview_msv_fv);
-        myScrollView.setMyScrollDis(150);
+        myScrollView.setMyScrollDis(300);
         fragment_v_at = (ViewPager) findViewById(R.id.fragment_v_at);
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new FragmentOne());

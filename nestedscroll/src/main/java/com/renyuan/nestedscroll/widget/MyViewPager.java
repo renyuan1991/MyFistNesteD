@@ -47,12 +47,9 @@ public class MyViewPager extends ViewPager implements NestedScrollingChild,Neste
 
     @Override
     public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
-        System.out.println("======MyViewPager.onNestedPreScroll=====");
-        System.out.println("dx = " + dx);
-        System.out.println("dy = " + dy);
+        System.out.println("MyViewPager.onNestedPreScroll dy = " + dy);
         dispatchNestedPreScroll(dx, dy, consumed, null);
-        System.out.println("consumed = " + consumed[1]);
-        System.out.println("======MyViewPager.onNestedPreScroll=====");
+        System.out.println("MyViewPager.onNestedPreScroll consumed = " + consumed[1]);
     }
 
     @Override

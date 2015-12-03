@@ -60,9 +60,7 @@ public class MyScrollView extends ScrollView implements NestedScrollingParent {
 
     @Override
     public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
-        System.out.println("====== ********* =====");
-        System.out.println("dx = " + dx);
-        System.out.println("dy = " + dy);
+        System.out.println("MyScrollView dy = " + dy);
 //        super.onNestedPreScroll(target, dx, dy, consumed);
         if(Math.abs(dy)>myScrollDis){//在y轴上的距离大于要滚动的距离，这个时候要让子空间消耗剩下的距离
             MyScrollView.this.scrollBy(dx, myScrollDis);
@@ -75,13 +73,10 @@ public class MyScrollView extends ScrollView implements NestedScrollingParent {
             }
         }else{
             MyScrollView.this.scrollBy(dx, dy);
-            consumed[0] = 0;//将剩下的距离返回给子类
             consumed[1] = 0;
         }
-        System.out.println("myScrollDis = " + myScrollDis);
-        System.out.println("剩余的dx = " + consumed[0]);
-        System.out.println("剩余的dy = " + consumed[1]);
-        System.out.println("====== ********* =====");
+        System.out.println("MyScrollView  myScrollDis = " + myScrollDis);
+        System.out.println("MyScrollView  剩余的dy = " + consumed[1]);
     }
 
     @Override

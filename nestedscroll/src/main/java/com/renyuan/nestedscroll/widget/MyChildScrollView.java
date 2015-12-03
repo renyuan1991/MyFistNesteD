@@ -45,11 +45,12 @@ public class MyChildScrollView extends ScrollView implements NestedScrollingChil
                 int moveY = (int)ev.getY();
                 int dx = moveX - downX;
                 int dy = moveY - downY;
-                System.out.println("~~~~~~~ 父类消耗前   前   前 ~~~~~~~");
-                System.out.println("dx = " + dx);
-                System.out.println("dy = " + dy);
+                System.out.println("*********************************开始**************************************");
+                System.out.println("*********************************开始**************************************");
+                System.out.println("mcsv dy = " + dy);
                 System.out.println("------分割线-------");
                 //在consumed中就是父类滑动后剩下的距离，
+                System.out.println("dispatchNestedPreScroll(0,dy,consumed,offsetInWindow) = "+dispatchNestedPreScroll(0,dy,consumed,offsetInWindow));
                 if(dispatchNestedPreScroll(0,dy,consumed,offsetInWindow)){
                     System.out.println("-----------------------------------------" + consumed[1]);
                     if(consumed[1]>0){
@@ -60,7 +61,7 @@ public class MyChildScrollView extends ScrollView implements NestedScrollingChil
                 }
                 MyChildScrollView.this.scrollBy(0,dy);
                 System.out.println("~~~~~~~ 父类消耗后   后   后 ~~~~~~~");
-                System.out.println("dy = " + dy);
+                System.out.println("mcsv dy = " + dy);
                 break;
             case MotionEvent.ACTION_UP:
                 stopNestedScroll();

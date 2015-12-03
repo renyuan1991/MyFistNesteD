@@ -36,32 +36,28 @@ public class MyChildScrollView extends ScrollView implements NestedScrollingChil
     public boolean onTouchEvent(MotionEvent ev) {
         switch (ev.getAction()){
             case MotionEvent.ACTION_DOWN:
-                downX = (int)ev.getX();
-                downY = (int)ev.getY();
+                downX = (int)ev.getRawX();
+                downY = (int)ev.getRawY();
                 startNestedScroll(ViewCompat.SCROLL_AXIS_HORIZONTAL | ViewCompat.SCROLL_AXIS_VERTICAL);
                 break;
             case MotionEvent.ACTION_MOVE:
-                int moveX = (int)ev.getX();
-                int moveY = (int)ev.getY();
+                int moveX = (int)ev.getRawX();
+                int moveY = (int)ev.getRawY();
                 int dx = moveX - downX;
                 int dy = moveY - downY;
-                System.out.println("*********************************开始**************************************");
-                System.out.println("*********************************开始**************************************");
-                System.out.println("mcsv dy = " + dy);
-                System.out.println("------分割线-------");
                 //在consumed中就是父类滑动后剩下的距离，
-                System.out.println("dispatchNestedPreScroll(0,dy,consumed,offsetInWindow) = "+dispatchNestedPreScroll(0,dy,consumed,offsetInWindow));
+                System.out.println("dispatchNestedPreScroll(0,dy,consumed,offsetInWindow) = " + dispatchNestedPreScroll(0, dy, consumed, offsetInWindow));
                 if(dispatchNestedPreScroll(0,dy,consumed,offsetInWindow)){
-                    System.out.println("-----------------------------------------" + consumed[1]);
-                    if(consumed[1]>0){
-                        dy = consumed[1];
-                    }else{
-                        dy = 0;
+                    if(dy>0){
+                        System.out.println("-----down-----");
+                        dy = dy - consumed[1];
+                    }else if(dy<0){
+                        System.out.println("------up------");
+                        dy = dy+consumed[1];
                     }
                 }
-                MyChildScrollView.this.scrollBy(0,dy);
-                System.out.println("~~~~~~~ 父类消耗后   后   后 ~~~~~~~");
-                System.out.println("mcsv dy = " + dy);
+                MyChildScrollView.this.scrollBy(0, dy);
+                System.out.println("dy = " + dy);
                 break;
             case MotionEvent.ACTION_UP:
                 stopNestedScroll();

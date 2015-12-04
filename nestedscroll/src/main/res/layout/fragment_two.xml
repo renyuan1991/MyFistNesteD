@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <ScrollView 
+    <com.renyuan.nestedscroll.widget.MyChildScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#3300ff00"
@@ -15,6 +15,6 @@
             android:textSize="100sp"
             android:text="我是测试文字我是测试文字"
             />
-    </ScrollView>
+    </com.renyuan.nestedscroll.widget.MyChildScrollView>
 
 </LinearLayout>

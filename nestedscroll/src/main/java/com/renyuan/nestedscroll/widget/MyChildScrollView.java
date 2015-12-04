@@ -51,12 +51,9 @@ public class MyChildScrollView extends ScrollView implements NestedScrollingChil
                 if(dispatchNestedPreScroll(0,dy,consumed,offsetInWindow)){
                     dy = consumed[1];
                     MyChildScrollView.this.scrollBy(0, dy);
-                    System.out.println("消****************耗");
                 }else {
-                    System.out.println("不-------消--------耗");
+
                 }
-                System.out.println("MyChildScrollView .. dy = " + dy);
-                System.out.println("================-------------------===============");
                 break;
             case MotionEvent.ACTION_UP:
                 stopNestedScroll();

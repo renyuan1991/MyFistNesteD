@@ -49,6 +49,7 @@ public class MyChildScrollView extends ScrollView implements NestedScrollingChil
                 downY = moveY;
                 //在consumed中就是父类滑动后剩下的距离，
                 if(dispatchNestedPreScroll(0,dy,consumed,offsetInWindow)){
+                    
                     dy = consumed[1];
                     MyChildScrollView.this.scrollBy(0, dy);
                 }else {

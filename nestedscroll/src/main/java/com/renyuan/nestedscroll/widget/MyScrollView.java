@@ -70,6 +70,7 @@ public class MyScrollView extends ScrollView implements NestedScrollingParent {
         }else {
             MyScrollView.this.scrollBy(dx, dy);
             sumScroll += dy;//记录这个view滑动的真实距离
+            
             consumed[1] = 0;
         }
 

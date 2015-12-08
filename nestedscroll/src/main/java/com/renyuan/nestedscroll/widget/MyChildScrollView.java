@@ -5,7 +5,6 @@ import android.support.v4.view.NestedScrollingChild;
 import android.support.v4.view.NestedScrollingChildHelper;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.widget.ScrollView;
@@ -21,7 +20,7 @@ public class MyChildScrollView extends ScrollView implements NestedScrollingChil
     private int downX;
     private int downY;
     private VelocityTracker mVelocityTracker = null;
-    private GestureDetector gestureDetector;
+    private boolean allowFly = false;
     public MyChildScrollView(Context context) {
         super(context);
     }
@@ -30,9 +29,6 @@ public class MyChildScrollView extends ScrollView implements NestedScrollingChil
         super(context, attrs);
         childHelper = new NestedScrollingChildHelper(this);
         setNestedScrollingEnabled(true);
-
-        gestureDetector = new GestureDetector(context,new GestureListener());
-        gestureDetector.setIsLongpressEnabled(false);
     }
 
     public MyChildScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -47,6 +43,7 @@ public class MyChildScrollView extends ScrollView implements NestedScrollingChil
 
         switch (ev.getAction()){
             case MotionEvent.ACTION_DOWN:
+                allowFly = false;
                 downX = (int)ev.getRawX();
                 downY = (int)ev.getRawY();
                 startNestedScroll(ViewCompat.SCROLL_AXIS_HORIZONTAL | ViewCompat.SCROLL_AXIS_VERTICAL);
@@ -62,29 +59,22 @@ public class MyChildScrollView extends ScrollView implements NestedScrollingChil
                 if(dispatchNestedPreScroll(0,dy,consumed,offsetInWindow)){
                     dy = consumed[1];
                     MyChildScrollView.this.scrollBy(0, dy);
-                    System.out.println("调用了 mVelocityTracker.computeCurrentVelocity(1000);");
-                    mVelocityTracker.computeCurrentVelocity(1000);//该参数指定的是1S内滑动的像素。也可以指定最大速率。
-                    System.out.println("   ----   " + mVelocityTracker.getYVelocity() + "");//得到y轴上的速度。
-                    fling(-(int)mVelocityTracker.getYVelocity());
+                    allowFly = true;
                 }else {
 
                 }
                 break;
             case MotionEvent.ACTION_UP:
                 stopNestedScroll();
+                if(allowFly){
+                    mVelocityTracker.computeCurrentVelocity(1000);//该参数指定的是1S内滑动的像素。也可以指定最大速率。
+                    int myScrollFly = (int)mVelocityTracker.getYVelocity();
+                    fling(-myScrollFly);//惯性滑动的方法
+                }
                 break;
         }
         return true;
     }
-
-    private class GestureListener extends GestureDetector.SimpleOnGestureListener {
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            System.out.println("GestureListener.onFling ========= "+velocityY);
-            return super.onFling(e1, e2, velocityX, velocityY);
-        }
-    }
-
     //~~~~~~~ 嵌套滑动的处理方法 ~~~~~~~
     @Override
     public void setNestedScrollingEnabled(boolean enabled) {

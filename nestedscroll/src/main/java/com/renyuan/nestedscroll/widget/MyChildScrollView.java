@@ -44,6 +44,7 @@ public class MyChildScrollView extends ScrollView implements NestedScrollingChil
             mVelocityTracker = VelocityTracker.obtain();
         }
         mVelocityTracker.addMovement(ev);
+
         switch (ev.getAction()){
             case MotionEvent.ACTION_DOWN:
                 downX = (int)ev.getRawX();
@@ -63,8 +64,8 @@ public class MyChildScrollView extends ScrollView implements NestedScrollingChil
                     MyChildScrollView.this.scrollBy(0, dy);
                     System.out.println("调用了 mVelocityTracker.computeCurrentVelocity(1000);");
                     mVelocityTracker.computeCurrentVelocity(1000);//该参数指定的是1S内滑动的像素。也可以指定最大速率。
-                    System.out.println("   ----   "+mVelocityTracker.getYVelocity(0) + "");//得到y轴上的速度。
-                    return gestureDetector.onTouchEvent(ev);
+                    System.out.println("   ----   " + mVelocityTracker.getYVelocity() + "");//得到y轴上的速度。
+                    fling(-(int)mVelocityTracker.getYVelocity());
                 }else {
 
                 }

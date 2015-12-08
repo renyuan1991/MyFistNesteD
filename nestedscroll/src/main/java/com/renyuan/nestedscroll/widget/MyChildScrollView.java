@@ -30,6 +30,7 @@ public class MyChildScrollView extends ScrollView implements NestedScrollingChil
         childHelper = new NestedScrollingChildHelper(this);
         setNestedScrollingEnabled(true);
     }
+    
 
     public MyChildScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);

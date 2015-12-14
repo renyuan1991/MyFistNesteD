@@ -6,20 +6,26 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
+
         <activity
-            android:name="com.renyuan.nestedscroll.view.activity.MainActivity"
-            android:label="@string/app_name" >
+            android:name=".view.activity.SplashActivity"
+            android:theme="@style/MyTheme.NoTitleBar.LoadingBackground"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            >
+            <!-- =============================================================== 入口 -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.renyuan.nestedscroll.view.activity.FgAndVP"
-            ></activity>
-
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:label="@string/app_name">
+        </activity>
+        <activity android:name=".view.activity.FgAndVP" />
     </application>
-
 
 </manifest>

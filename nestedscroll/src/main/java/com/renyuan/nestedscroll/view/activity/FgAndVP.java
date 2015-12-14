@@ -38,6 +38,5 @@ public class FgAndVP extends FragmentActivity {
         FragmentAdapter fragmentAdapter = new FragmentAdapter(getSupportFragmentManager() , fragments);
         //设定适配器
         fragment_v_at.setAdapter(fragmentAdapter);
-
     }
 }

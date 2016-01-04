@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
     </style>
     <style name="MyTheme.NoTitleBar.LoadingBackground" parent="android:Theme.Black">
-        <item name="android:windowBackground">@mipmap/loading</item>
+        <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.VideoView;
 
@@ -25,8 +24,7 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ImageView loading_iv_as = (ImageView) findViewById(R.id.loading_iv_as);
-        loading_iv_as.setVisibility(View.GONE);
-        myLoadingTime();
+//        myLoadingTime();
         //动画启动页
         //startAnmina();
 
@@ -40,7 +38,7 @@ public class SplashActivity extends Activity {
 
     //======================= 播放动画 =======================
         public void startAnmina(){
-
+            this.recreate();
         }
 
 

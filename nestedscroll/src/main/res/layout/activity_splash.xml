@@ -4,13 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.renyuan.nestedscroll.view.activity.SplashActivity">
+
     <ImageView
-        android:layout_width="match_parent"
         android:id="@+id/loading_iv_as"
-        android:layout_height="match_parent"/>
+        android:src="@mipmap/loading"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <VideoView
+        android:id="@+id/sufaceview_sfv_as"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/sufaceview_sfv_as"/>
+        android:visibility="gone" />
 
 </RelativeLayout>
